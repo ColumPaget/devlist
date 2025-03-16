@@ -1,0 +1,35 @@
+OBJ=common.o command-line.o display.o usb.o scsi.o pci.o pci_id.o
+FLAGS=-g @DEFS@
+LIBS=@LIBS@
+LIBUSEFUL_BUNDLED=@LIBUSEFUL_BUNDLED@
+
+all: $(OBJ) @LIBUSEFUL_BUNDLED@
+	gcc $(FLAGS) -o devlist main.c $(OBJ) $(LIBUSEFUL_BUNDLED) $(LIBS) 
+
+libUseful-bundled/libUseful.a:
+	$(MAKE) -C libUseful-bundled
+
+common.o: common.c common.h
+	gcc $(FLAGS) -c common.c
+
+display.o: display.c display.h
+	gcc $(FLAGS) -c display.c
+
+usb.o: usb.c usb.h
+	gcc $(FLAGS) -c usb.c
+
+pci.o: pci.c pci.h
+	gcc $(FLAGS) -c pci.c
+
+scsi.o: scsi.c scsi.h
+	gcc $(FLAGS) -c scsi.c
+
+pci_id.o: pci_id.c pci_id.h
+	gcc $(FLAGS) -c pci_id.c
+
+command-line.o: command-line.c command-line.h
+	gcc $(FLAGS) -c command-line.c
+
+
+clean:
+	rm *.o *.orig */*.o */*.a */*.so */*.so.*
