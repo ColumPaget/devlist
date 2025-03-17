@@ -150,11 +150,11 @@ TDevice *USBDeviceLoad(const char *Path)
 
     dev->Class=CopyStr(dev->Class, USBLookupClass(val));
     LookupAnyDevNode(dev, Path);
-		if (! StrValid(dev->DevNode))
-		{
-			Tempstr=MCopyStr(Tempstr, Path, "/*/", NULL);
-    	LookupAnyDevNode(dev, Tempstr);
-		}
+    if (! StrValid(dev->DevNode))
+    {
+        Tempstr=MCopyStr(Tempstr, Path, "/*/", NULL);
+        LookupAnyDevNode(dev, Tempstr);
+    }
 
     Destroy(Tempstr);
     return(dev);

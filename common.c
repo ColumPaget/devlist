@@ -52,37 +52,46 @@ uint64_t ReadUint64File(const char *Dir, const char *File)
 }
 
 
-char *LookupDevNode(char *RetStr, const char *Path, const char *SubDir)
+char *LookupDevNode(char *RetStr, const char *Path, const char *SubDir, const char *PostFix)
 {
-char *Tempstr=NULL;
-glob_t Glob;
+    char *Tempstr=NULL;
+    glob_t Glob;
 
-		RetStr=CopyStr(RetStr, "");
-    Tempstr=MCopyStr(Tempstr, Path, "/", SubDir, "/*", NULL);
+    RetStr=CopyStr(RetStr, "");
+    Tempstr=MCopyStr(Tempstr, Path, "/", SubDir, "/", PostFix, NULL);
     glob(Tempstr, 0, 0, &Glob);
     if (Glob.gl_pathc > 0)
     {
-      RetStr=CopyStr(RetStr, GetBasename(Glob.gl_pathv[0]));
-			StripTrailingWhitespace(RetStr);
-      globfree(&Glob);
+        RetStr=CopyStr(RetStr, GetBasename(Glob.gl_pathv[0]));
+        StripTrailingWhitespace(RetStr);
+        globfree(&Glob);
     }
 
-Destroy(Tempstr);
+    Destroy(Tempstr);
 
-return(RetStr);
+    return(RetStr);
 }
 
 
 void LookupAnyDevNode(TDevice *dev, const char *Path)
 {
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "block");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "net");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "bluetooth");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "tty");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "input");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "sound");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "graphics");
-    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "hwmon");
+    char *Tempstr=NULL;
+
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "block","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "net","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "bluetooth","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "tty","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "sound","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "graphics","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "hwmon","*");
+    if (! StrValid(dev->DevNode)) dev->DevNode=LookupDevNode(dev->DevNode, Path, "input", "*/event*");
+    if (! StrValid(dev->DevNode))
+    {
+        Tempstr=MCopyStr(Tempstr, Path, "/*/*/", NULL);
+        dev->DevNode=LookupDevNode(dev->DevNode, Tempstr, "input", "*/event*");
+    }
+
+    Destroy(Tempstr);
 }
 
 

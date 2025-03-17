@@ -26,15 +26,15 @@ TDevice *SCSIDeviceLoad(const char *Path)
 
     Tempstr=MCopyStr(Tempstr, "/block/", dev->DevNode, "/removable", NULL);
     val=ReadIntegerFile(Path, Tempstr);
-		if (val) dev->Flags |= FLAG_REMOVABLE;
+    if (val) dev->Flags |= FLAG_REMOVABLE;
 
     Tempstr=MCopyStr(Tempstr, "/block/", dev->DevNode, "/ro", NULL);
     val=ReadIntegerFile(Path, Tempstr);
-		if (val) dev->Flags |= FLAG_READONLY;
+    if (val) dev->Flags |= FLAG_READONLY;
 
 
-		if (dev->Flags & FLAG_REMOVABLE)	dev->Class=CatStr(dev->Class, "removable ");
-		if (dev->Flags & FLAG_READONLY) dev->Class=CatStr(dev->Class, "read-only ");
+    if (dev->Flags & FLAG_REMOVABLE)	dev->Class=CatStr(dev->Class, "removable ");
+    if (dev->Flags & FLAG_READONLY) dev->Class=CatStr(dev->Class, "read-only ");
 
     switch (atoi(dev->idClass))
     {

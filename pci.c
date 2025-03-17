@@ -28,7 +28,7 @@ TDevice *PCIDeviceLoad(const char *Path, ListNode *PCIids)
 {
     TDevice *dev;
     char *Tempstr=NULL, *Key=NULL;
-		glob_t Glob;
+    glob_t Glob;
     const char *ptr;
 
     dev=(TDevice *) calloc(1, sizeof(TDevice));

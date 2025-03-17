@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     int Flags;
 
-		PciIDsDirs=CopyStr(PciIDsDirs, "/usr/share:/usr/share/lshw:/usr/share/misc");
+    PciIDsDirs=CopyStr(PciIDsDirs, "/usr/share:/usr/share/lshw:/usr/share/misc");
     Flags=ParseCommandLine(argc, argv);
 
     if (Flags & SHOW_BUS_PCI) PCIGetList(Flags);

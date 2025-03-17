@@ -52,6 +52,7 @@ then
 else
   AC_SUBST(LIBUSEFUL_BUNDLED,"libUseful-bundled/libUseful.a")
   AC_CONFIG_SUBDIRS([libUseful-bundled])
+  AC_DEFINE([USE_LIBUSEFUL_BUNDLED])
 fi
 
 

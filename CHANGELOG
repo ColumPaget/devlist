@@ -1,0 +1,11 @@
+Author: ColumPaget <colums.projects@gmail.com>
+Date:   Sun Mar 16 16:21:32 2025 +0000
+
+v1.1 (2025-03-17)
+  * Added LICENSE
+  * Fix issue with building without system wide libUseful
+  * Add support for displaying inputXX devices
+
+v1.0 (2025-03-16)
+  *¬nitial release
+

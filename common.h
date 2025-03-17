@@ -1,14 +1,20 @@
 #ifndef DEVLIST_COMMON_H
 #define DEVLIST_COMMON_H
 
+#ifdef USE_LIBUSEFUL_BUNDLED
+#include "libUseful-bundled/libUseful.h"
+#else
 #include "libUseful-5/libUseful.h"
+#endif
+
+
 #include <glob.h>
 
 
 #define FLAG_REMOVABLE 1
 #define FLAG_READONLY  2
 
-#define VERSION "1.0"
+#define VERSION "1.1"
 
 extern char *PciIDsFile;
 extern char *PciIDsDirs;
@@ -37,7 +43,7 @@ typedef struct
 char *ReadFile(char *RetStr, const char *Dir, const char *File);
 int ReadIntegerFile(const char *Dir, const char *File);
 uint64_t ReadUint64File(const char *Dir, const char *File);
-char *LookupDevNode(char *RetStr, const char *Path, const char *SubDir);
+char *LookupDevNode(char *RetStr, const char *Path, const char *SubDir, const char *PostFix);
 void LookupAnyDevNode(TDevice *dev, const char *Path);
 void TDeviceDestroy(void *p_Dev);
 

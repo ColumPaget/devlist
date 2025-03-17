@@ -67,3 +67,8 @@ The pci.ids file is required to look up pci device names. It should be preinstal
 
 If your pci.ids file is stored in an unusual place then you can use the '-I' flag to provide the path to it.
 
+
+SCREENSHOT
+==========
+
+![devlist screenshot](devlist.png)
