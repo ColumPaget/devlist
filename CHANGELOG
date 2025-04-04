@@ -1,6 +1,10 @@
 Author: ColumPaget <colums.projects@gmail.com>
 Date:   Sun Mar 16 16:21:32 2025 +0000
 
+v1.2 (2025-04-04)
+  * Distinguish between SSDs and HDDs in scsi report
+  * Raid controller class now recognized in scsi
+
 v1.1 (2025-03-17)
   * Added LICENSE
   * Fix issue with building without system wide libUseful
