@@ -56,6 +56,8 @@ TDevice *PCIDeviceLoad(const char *Path, ListNode *PCIids)
     dev->Description=CopyStr(dev->Description, ptr);
 
     Tempstr=FormatStr(Tempstr, "C%06x", strtol(dev->idClass, NULL, 16));
+    dev->Class=CopyStr(dev->Class, Tempstr);
+
     ptr=GetVar(PCIids, Tempstr);
 
     if (! StrValid(ptr))

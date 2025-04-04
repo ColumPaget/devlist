@@ -39,13 +39,16 @@ TDevice *SCSIDeviceLoad(const char *Path)
     switch (atoi(dev->idClass))
     {
     case 0:
-        dev->Class=CatStr(dev->Class, "hardisk");
+    		Tempstr=MCopyStr(Tempstr, "/block/", dev->DevNode, "/queue/rotational", NULL);
+    		val=ReadIntegerFile(Path, Tempstr);
+        if (val==0) dev->Class=CatStr(dev->Class, "SSD");
+				else dev->Class=CatStr(dev->Class, "HDD");
         break;
     case 1:
         dev->Class=CatStr(dev->Class, "tape");
         break;
     case 3:
-        dev->Class=CatStr(dev->Class, "proccessor");
+        dev->Class=CatStr(dev->Class, "processor");
         break;
     case 4:
         dev->Class=CatStr(dev->Class, "worm drive");
@@ -62,9 +65,21 @@ TDevice *SCSIDeviceLoad(const char *Path)
     case 8:
         dev->Class=CatStr(dev->Class, "changer");
         break;
+
+		case 0xc:
+				dev->Class=CatStr(dev->Class, "raid controller");
+				break;
+
     case 0xd:
         dev->Class=CatStr(dev->Class, "enclosure");
         break;
+
+		
+
+		default:
+			if (StrValid(dev->idClass)) dev->Class=FormatStr(dev->Class, "class:%s", dev->idClass);
+			else dev->Class=CopyStr(dev->Class, "class:unknown");
+			break;
     }
 
 

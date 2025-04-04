@@ -32,4 +32,4 @@ command-line.o: command-line.c command-line.h
 
 
 clean:
-	rm *.o *.orig */*.o */*.a */*.so */*.so.*
+	rm *.o *.orig */*.o */*.a */*.so */*.so.* devlist

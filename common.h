@@ -14,7 +14,7 @@
 #define FLAG_REMOVABLE 1
 #define FLAG_READONLY  2
 
-#define VERSION "1.1"
+#define VERSION "1.2"
 
 extern char *PciIDsFile;
 extern char *PciIDsDirs;
