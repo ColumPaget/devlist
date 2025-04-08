@@ -39,10 +39,10 @@ TDevice *SCSIDeviceLoad(const char *Path)
     switch (atoi(dev->idClass))
     {
     case 0:
-    		Tempstr=MCopyStr(Tempstr, "/block/", dev->DevNode, "/queue/rotational", NULL);
-    		val=ReadIntegerFile(Path, Tempstr);
+        Tempstr=MCopyStr(Tempstr, "/block/", dev->DevNode, "/queue/rotational", NULL);
+        val=ReadIntegerFile(Path, Tempstr);
         if (val==0) dev->Class=CatStr(dev->Class, "SSD");
-				else dev->Class=CatStr(dev->Class, "HDD");
+        else dev->Class=CatStr(dev->Class, "HDD");
         break;
     case 1:
         dev->Class=CatStr(dev->Class, "tape");
@@ -66,20 +66,20 @@ TDevice *SCSIDeviceLoad(const char *Path)
         dev->Class=CatStr(dev->Class, "changer");
         break;
 
-		case 0xc:
-				dev->Class=CatStr(dev->Class, "raid controller");
-				break;
+    case 0xc:
+        dev->Class=CatStr(dev->Class, "raid controller");
+        break;
 
     case 0xd:
         dev->Class=CatStr(dev->Class, "enclosure");
         break;
 
-		
 
-		default:
-			if (StrValid(dev->idClass)) dev->Class=FormatStr(dev->Class, "class:%s", dev->idClass);
-			else dev->Class=CopyStr(dev->Class, "class:unknown");
-			break;
+
+    default:
+        if (StrValid(dev->idClass)) dev->Class=FormatStr(dev->Class, "class:%s", dev->idClass);
+        else dev->Class=CopyStr(dev->Class, "class:unknown");
+        break;
     }
 
 
@@ -96,7 +96,7 @@ TDevice *SCSIDeviceLoad(const char *Path)
 
 
 
-ListNode *SCSIGetList(int Flags)
+void SCSIShow(int Flags)
 {
     glob_t Glob;
     char *Tempstr=NULL;

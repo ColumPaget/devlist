@@ -3,6 +3,6 @@
 
 #include "common.h"
 
-ListNode *SCSIGetList(int Flags);
+void SCSIShow(int Flags);
 
 #endif

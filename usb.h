@@ -4,7 +4,7 @@
 #include "common.h"
 
 int USBReset(TDevice *dev);
-ListNode *USBGetList(int Flags);
+void USBShow(int Flags);
 
 
 #endif

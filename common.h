@@ -14,7 +14,7 @@
 #define FLAG_REMOVABLE 1
 #define FLAG_READONLY  2
 
-#define VERSION "1.2"
+#define VERSION "1.3"
 
 extern char *PciIDsFile;
 extern char *PciIDsDirs;
@@ -24,6 +24,7 @@ typedef struct
     unsigned long BusNum;
     unsigned long DevNum;
     unsigned long PowerMax;
+    unsigned long PowerNow;
     uint64_t Speed;
     uint64_t Size;
 		int Flags;
@@ -37,6 +38,7 @@ typedef struct
     char *Vendor;
     char *idProduct;
     char *Description;
+		char *Status;
 } TDevice;
 
 

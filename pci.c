@@ -88,7 +88,7 @@ TDevice *PCIDeviceLoad(const char *Path, ListNode *PCIids)
 
 
 
-ListNode *PCIGetList(int Flags)
+void PCIShow(int Flags)
 {
     glob_t Glob;
     char *Tempstr=NULL;

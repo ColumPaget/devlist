@@ -161,7 +161,7 @@ TDevice *USBDeviceLoad(const char *Path)
 }
 
 
-ListNode *USBGetList(int Flags)
+void USBShow(int Flags)
 {
     glob_t Glob;
     char *Tempstr=NULL;

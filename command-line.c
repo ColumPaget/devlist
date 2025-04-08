@@ -8,6 +8,7 @@ void PrintHelp()
     printf("  -pci              - print PCI devices only\n");
     printf("  -usb              - print USB devices only\n");
     printf("  -scsi             - print SCSI devices only\n");
+    printf("  -bat              - print battery devices only\n");
     printf("  -I <path>         - path to pci.ids file if not in standard places\n");
     printf("  -?                - print this help\n");
     printf("  -help             - print this help\n");
@@ -37,6 +38,8 @@ int ParseCommandLine(int argc, char *argv[])
         if (strcasecmp(ptr, "-pci")==0) Flags |= SHOW_BUS_PCI;
         else if (strcasecmp(ptr, "-usb")==0) Flags |= SHOW_BUS_USB;
         else if (strcasecmp(ptr, "-scsi")==0) Flags |= SHOW_BUS_SCSI;
+        else if (strcasecmp(ptr, "-bat")==0) Flags |= SHOW_BUS_BATTERY;
+        else if (strcasecmp(ptr, "-battery")==0) Flags |= SHOW_BUS_BATTERY;
         else if (strcasecmp(ptr, "-I")==0) PciIDsFile=CopyStr(PciIDsFile, CommandLineNext(Cmd));
         else if (strcasecmp(ptr, "-?")==0) PrintHelp();
         else if (strcasecmp(ptr, "-help")==0) PrintHelp();

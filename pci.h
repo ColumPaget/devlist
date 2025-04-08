@@ -5,6 +5,6 @@
 #include "common.h"
 
 TDevice *PCIDeviceLoad(const char *Path, ListNode *PCIids);
-ListNode *PCIGetList(int Flags);
+void PCIShow(int Flags);
 
 #endif
